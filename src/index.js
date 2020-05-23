@@ -1,17 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { createOvermind } from "overmind";
+import { Provider } from "overmind-react";
+import * as React from "react";
+import { render } from "react-dom";
+import { config } from "./app";
+import TodoApp from "./components/TodoApp";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import "todomvc-common/base.css";
+import "todomvc-app-css/index.css";
+
+const rootElement = document.getElementById("root");
+
+export const overmind = createOvermind(config, { devtools: false });
+
+render(
+  <Provider value={overmind}>
+    <TodoApp />
+  </Provider>,
+
+  rootElement
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
